@@ -496,50 +496,11 @@ on post-fs
     # Permissions for BCU Driver
     chown system system /sys/devices/platform/msic_ocd/msic_current/batt_level
 
-    # Permissions for Touch Palm node
-    chown system system /proc/asus_touch_palm_status
-
-    # Permissions for Touch Proximity node
-    chown system system /proc/asus_touch_proximity_status
-
     # Permissions for Vibrator
     chmod 0777 /sys/devices/pci0000:00/0000:00:06.6/pwm_ontime_div
     chown system system /sys/devices/pci0000:00/0000:00:06.6/pwm_ontime_div
     chmod 0777 /sys/devices/pci0000:00/0000:00:06.6/vibrator
     chown system system /sys/devices/pci0000:00/0000:00:06.6/vibrator
-
-    # Permissions for Touch Glove Mode
-    chmod 0777 /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/glove_mode
-    chown system system /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/glove_mode
-    chown system system /sys/android_touch/glove_mode
-
-    setprop persist.asus.glove 0
-
-    # Permissions for Touch dclick Mode
-    chmod 0777 /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/dclick_mode
-    chown system system /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/dclick_mode
-    chown system system /sys/android_touch/dclick_mode
-
-    setprop persist.asus.dclick 0
-
-    # Permissions for Sdcard Power Node
-    chown system system /proc/asus_sd_power
-
-on property:persist.asus.glove=0
-    write /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/glove_mode 0
-    write /sys/android_touch/glove_mode 0
-
-on property:persist.asus.glove=1
-    write /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/glove_mode 1
-    write /sys/android_touch/glove_mode 1
-
-on property:persist.asus.dclick=0
-    write /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/dclick_mode 0
-    write /sys/android_touch/dclick_mode 0
-
-on property:persist.asus.dclick=1
-    write /sys/devices/pci0000:00/0000:00:00.3/i2c-0/0-0020/input/input1/dclick_mode 1
-    write /sys/android_touch/dclick_mode 1
 
 on property:init.svc.pvrsrvctl=stopped
     # GPU freq
@@ -608,13 +569,6 @@ service_redefine dpst /system/bin/dpstmgr
     class main
     user system
     group system
-
-# pclinkd is controlled via property triggers in init.<platform>.usb.rc
-# service pclinkd /sbin/pclinkd --root_seclabel=u:r:su:s0
-#     class core
-#     socket pclinkd stream 660 system system
-#     disabled
-#     seclabel u:r:pclinkd:s0
 
 # From init.rc in stock, these redefine service definitions
 
