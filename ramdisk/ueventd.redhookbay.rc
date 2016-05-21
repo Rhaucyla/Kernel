@@ -1,10 +1,6 @@
 # Put Matrix driver device interface to diag grp
 /dev/matrix                             0640   root       diag
 
-# PC Link Support
-/dev/android_pclink        0660   adb        adb
-/dev/android_pclink_enable 0660   adb        adb
-
 # modem tty node change to radio user can read and write
 /dev/gsmtty*              0660   system     radio
 /dev/ttyMFD*              0660   system     radio
